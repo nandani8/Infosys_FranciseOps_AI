@@ -23,6 +23,8 @@ if not JWT_SECRET or not EMAIL_ADDRESS or not EMAIL_PASSWORD:
 
 USERS_FILE = "users.json"
 OTP_EXPIRY_MINUTES = 5
+BRAND_NAME = "Infosys Franchise Analytics & Management"
+BRAND_TAGLINE = "Intelligent Analytics"
 
 PASSWORD_REGEX = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$'
 EMAIL_REGEX = r'^[A-Za-z0-9._%+-]{2,}@[A-Za-z]{2,}\.[A-Za-z]{2,}$'
@@ -79,27 +81,60 @@ def verify_otp_token(token, input_otp, email):
 
 def send_otp_email(receiver_email, otp):
     msg = EmailMessage()
-    msg["Subject"] = "Your OTP for Password Reset"
+    msg["Subject"] = f"{BRAND_NAME} - Verification Code"
     msg["From"] = EMAIL_ADDRESS
     msg["To"] = receiver_email
+
     msg.set_content(
-        f"Your OTP is: {otp}\nThis code expires in {OTP_EXPIRY_MINUTES} minutes.\n"
+        f"Your verification code is: {otp}\n"
+        f"This code expires in {OTP_EXPIRY_MINUTES} minutes.\n"
         f"If you did not request this, you can safely ignore this email."
     )
+
+    html_body = f"""\
+    <html>
+      <body style="font-family: Arial, sans-serif; background-color:#f4f5f7; padding: 30px;">
+        <div style="max-width: 480px; margin: 0 auto; background: #ffffff; border: 1px solid #d0d0d0;
+                    border-radius: 6px; padding: 30px; text-align: center;">
+          <h2 style="color: #1a1f36; margin-bottom: 20px;">{BRAND_NAME}</h2>
+          <p style="color: #333; font-size: 14px; margin-bottom: 25px;">
+            We received a request to reset your password for <b>{receiver_email}</b>.
+            Please use the verification code below:
+          </p>
+          <div style="display: inline-block; background: #fbe36a; border: 1px solid #1a1f36;
+                      border-radius: 6px; padding: 14px 28px; font-size: 28px;
+                      font-weight: 700; letter-spacing: 6px; color: #1a1f36; margin-bottom: 20px;">
+            {otp}
+          </div>
+          <p style="color: #555; font-size: 13px; margin-top: 20px;">
+            This code expires in {OTP_EXPIRY_MINUTES} minutes.
+          </p>
+          <hr style="border: none; border-top: 1px solid #eee; margin: 25px 0;">
+          <p style="color: #999; font-size: 11px;">
+            If you did not request this, you can safely ignore this email.<br>
+            © 2026 {BRAND_NAME}
+          </p>
+        </div>
+      </body>
+    </html>
+    """
+
+    msg.add_alternative(html_body, subtype="html")
+
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
         smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
         smtp.send_message(msg)
 
 
 # ---------------- PAGE SETUP ---------------- #
-st.set_page_config(page_title="Infosys FranchiseOps AI", page_icon="🏢", layout="centered")
+st.set_page_config(page_title=BRAND_NAME, page_icon="⚡", layout="centered")
 
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
 
     .stApp {
-        background: radial-gradient(circle at top, #eef1fb 0%, #e4e8f7 45%, #dfe4f5 100%);
+        background: linear-gradient(135deg, #eef1fb 0%, #e0e7ff 30%, #fce7f3 65%, #fef3c7 100%);
     }
     div.block-container {
         max-width: 480px;
@@ -114,26 +149,25 @@ st.markdown("""
         margin-bottom: 0.3rem;
     }
     .brand-badge .logo-box {
-        background: linear-gradient(135deg, #4f46e5, #6366f1);
+        background: linear-gradient(135deg, #f59e0b, #ef4444, #8b5cf6);
         color: white;
-        font-family: 'Poppins', sans-serif;
-        font-weight: 800;
-        font-size: 1.1rem;
+        font-size: 1.4rem;
         width: 42px;
         height: 42px;
         border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+        box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
     }
     .brand-badge h1 {
         font-family: 'Poppins', sans-serif !important;
-        font-size: 1.7rem !important;
+        font-size: 1.35rem !important;
         font-weight: 800 !important;
         color: #1a1f36;
         margin: 0 !important;
-        letter-spacing: -0.5px;
+        letter-spacing: -0.3px;
+        line-height: 1.2;
     }
     .brand-sub {
         text-align: center;
@@ -154,7 +188,7 @@ st.markdown("""
     div[data-testid="stVerticalBlockBorderWrapper"] {
         background: #ffffff;
         border-radius: 20px !important;
-        box-shadow: 0 12px 40px rgba(79, 70, 229, 0.12), 0 2px 8px rgba(31, 41, 55, 0.06);
+        box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15), 0 2px 8px rgba(31, 41, 55, 0.06);
         border: 1px solid #eef0f4 !important;
         padding: 0.8rem 0.6rem !important;
     }
@@ -180,34 +214,34 @@ st.markdown("""
         background-color: #fafbff !important;
     }
     .stTextInput input:focus {
-        border-color: #4f46e5 !important;
-        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12) !important;
+        border-color: #8b5cf6 !important;
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15) !important;
     }
 
-    button[kind="primary"] {
+    /* Main content primary/secondary buttons */
+    div.block-container button[kind="primary"] {
         border-radius: 12px !important;
         font-weight: 700 !important;
         font-size: 1.05rem !important;
         padding: 0.9rem 0 !important;
         min-height: 3.2rem !important;
-        background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%) !important;
         color: white !important;
         border: none !important;
         margin-top: 0.8rem !important;
-        box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35) !important;
+        box-shadow: 0 6px 18px rgba(139, 92, 246, 0.4) !important;
         transition: all 0.15s ease !important;
     }
-    button[kind="primary"]:hover {
+    div.block-container button[kind="primary"]:hover {
         transform: translateY(-1px) !important;
-        box-shadow: 0 8px 22px rgba(79, 70, 229, 0.45) !important;
-        background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%) !important;
+        box-shadow: 0 8px 22px rgba(139, 92, 246, 0.5) !important;
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #c026d3 100%) !important;
     }
-
-    button[kind="secondary"] {
+    div.block-container button[kind="secondary"] {
         background: none !important;
         box-shadow: none !important;
         border: none !important;
-        color: #4f46e5 !important;
+        color: #7c3aed !important;
         font-weight: 600 !important;
         font-size: 0.9rem !important;
         padding: 0.4rem 0 !important;
@@ -215,30 +249,71 @@ st.markdown("""
         margin-top: 0.5rem !important;
         text-decoration: underline;
     }
-    button[kind="secondary"]:hover {
-        color: #3730a3 !important;
+    div.block-container button[kind="secondary"]:hover {
+        color: #c026d3 !important;
         background: none !important;
         box-shadow: none !important;
     }
 
+    /* Sidebar */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #1a1f36 0%, #12162a 100%);
+        background: linear-gradient(180deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
     }
     section[data-testid="stSidebar"] * {
         color: #f3f4f6 !important;
     }
-    section[data-testid="stSidebar"] label {
+
+    /* Sidebar nav buttons — pill style, not radio */
+    section[data-testid="stSidebar"] button[kind="secondary"] {
+        width: 100% !important;
+        text-align: left !important;
+        justify-content: flex-start !important;
+        background: rgba(255,255,255,0.03) !important;
+        color: #cbd5e1 !important;
         font-weight: 500 !important;
+        font-size: 0.92rem !important;
+        border-radius: 10px !important;
+        padding: 0.65rem 0.9rem !important;
+        margin-bottom: 0.25rem !important;
+        border: none !important;
+        box-shadow: none !important;
+        text-decoration: none !important;
+        min-height: auto !important;
+        transition: all 0.15s ease !important;
     }
+    section[data-testid="stSidebar"] button[kind="secondary"]:hover {
+        background: rgba(255,255,255,0.1) !important;
+        color: #ffffff !important;
+    }
+    section[data-testid="stSidebar"] button[kind="primary"] {
+        width: 100% !important;
+        text-align: left !important;
+        justify-content: flex-start !important;
+        background: linear-gradient(135deg, #f59e0b, #ef4444) !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        font-size: 0.92rem !important;
+        border-radius: 10px !important;
+        padding: 0.65rem 0.9rem !important;
+        margin-bottom: 0.25rem !important;
+        border: none !important;
+        box-shadow: 0 3px 12px rgba(239, 68, 68, 0.45) !important;
+        min-height: auto !important;
+    }
+    section[data-testid="stSidebar"] button[kind="primary"] p,
+    section[data-testid="stSidebar"] button[kind="secondary"] p {
+        text-align: left !important;
+    }
+
     .sidebar-footer {
         position: fixed;
         bottom: 1.4rem;
         left: 1.4rem;
-        color: #6b7280;
+        color: #9ca3af;
         font-size: 0.72rem;
     }
     .milestone-banner {
-        background: linear-gradient(135deg, #10b981, #059669);
+        background: linear-gradient(135deg, #10b981, #06b6d4, #3b82f6);
         color: white;
         padding: 0.85rem 1.1rem;
         border-radius: 12px;
@@ -246,7 +321,7 @@ st.markdown("""
         font-size: 0.95rem;
         text-align: center;
         margin-bottom: 1.2rem;
-        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
     }
     .info-row {
         display: flex;
@@ -278,7 +353,43 @@ if "auth_view" not in st.session_state:
 if "forgot_stage" not in st.session_state:
     st.session_state["forgot_stage"] = "choose"
 if "dashboard_view" not in st.session_state:
-    st.session_state["dashboard_view"] = "Home"
+    st.session_state["dashboard_view"] = "Dashboard"
+
+
+def render_sidebar_brand():
+    st.sidebar.markdown(f"""
+    <div style="padding: 0.3rem 0 1rem;">
+        <div style="display:flex;align-items:center;gap:10px;">
+            <div style="background:linear-gradient(135deg,#f59e0b,#ef4444,#8b5cf6);width:36px;height:36px;
+                        border-radius:10px;display:flex;align-items:center;justify-content:center;
+                        font-size:1.05rem;">⚡</div>
+            <div>
+                <div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:0.85rem;
+                            color:#f3f4f6;line-height:1.2;">{BRAND_NAME}</div>
+                <div style="font-size:0.7rem;color:#9ca3af;font-weight:500;">{BRAND_TAGLINE}</div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+def render_header():
+    st.markdown(f"""
+    <div class="brand-badge">
+        <div class="logo-box">⚡</div>
+        <h1>{BRAND_NAME}</h1>
+    </div>
+    """, unsafe_allow_html=True)
+    st.markdown(f'<div class="brand-sub">{BRAND_TAGLINE}</div>', unsafe_allow_html=True)
+
+
+def nav_button(label, icon, key, active):
+    return st.sidebar.button(
+        f"{icon}   {label}",
+        key=key,
+        type="primary" if active else "secondary",
+        use_container_width=True
+    )
 
 
 # ---------------- DASHBOARD (only if a VALID JWT exists) ---------------- #
@@ -286,43 +397,28 @@ if "token" in st.session_state:
     try:
         payload = jwt.decode(st.session_state["token"], JWT_SECRET, algorithms=["HS256"])
 
-        # ---- Dashboard sidebar menu ---- #
-        st.sidebar.markdown("""
-        <div style="padding: 0.3rem 0 1.4rem;">
-            <div style="display:flex;align-items:center;gap:8px;">
-                <div style="background:linear-gradient(135deg,#4f46e5,#6366f1);width:32px;height:32px;
-                            border-radius:9px;display:flex;align-items:center;justify-content:center;
-                            font-family:'Poppins',sans-serif;font-weight:800;font-size:0.85rem;color:white;">IN</div>
-                <div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:1rem;color:#f3f4f6;">FranchiseOps AI</div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        render_sidebar_brand()
 
         st.sidebar.markdown(
-            '<div style="color:#9ca3af;font-size:0.72rem;font-weight:700;letter-spacing:1px;'
-            'text-transform:uppercase;margin-bottom:0.4rem;">Dashboard</div>',
+            '<div style="color:#9ca3af;font-size:0.7rem;font-weight:700;letter-spacing:1px;'
+            'text-transform:uppercase;margin-bottom:0.5rem;">Menu</div>',
             unsafe_allow_html=True
         )
 
-        dash_pages = ["Home", "My Profile"]
-        dash_labels = {"Home": "🏠  Home", "My Profile": "👤  My Profile"}
+        dash_items = [("Dashboard", "🏠"), ("Analytics", "📊"), ("Reports", "📄"), ("My Profile", "👤")]
+        for label, icon in dash_items:
+            if nav_button(label, icon, f"nav_{label}", st.session_state["dashboard_view"] == label):
+                st.session_state["dashboard_view"] = label
+                st.rerun()
 
-        dashboard_view = st.sidebar.radio(
-            "Dashboard Nav",
-            dash_pages,
-            index=dash_pages.index(st.session_state["dashboard_view"]),
-            label_visibility="collapsed",
-            format_func=lambda p: dash_labels[p]
-        )
-        st.session_state["dashboard_view"] = dashboard_view
+        st.sidebar.markdown('<hr style="border-color:#3730a3;margin:1rem 0 0.8rem;">', unsafe_allow_html=True)
 
-        st.sidebar.markdown('<hr style="border-color:#2d3350;margin:1rem 0 0.8rem;">', unsafe_allow_html=True)
-        if st.sidebar.button("Log Out", type="primary", use_container_width=True, icon="🔒"):
+        if st.sidebar.button("🔒   Log Out", key="logout_btn", type="secondary", use_container_width=True):
             del st.session_state["token"]
             del st.session_state["username"]
             st.session_state["active_page"] = "Login"
             st.session_state["auth_view"] = "login"
-            st.session_state["dashboard_view"] = "Home"
+            st.session_state["dashboard_view"] = "Dashboard"
             st.rerun()
 
         st.sidebar.markdown(
@@ -330,36 +426,39 @@ if "token" in st.session_state:
             unsafe_allow_html=True
         )
 
-        # ---- Main dashboard content ---- #
-        st.markdown("""
-        <div class="brand-badge">
-            <div class="logo-box">IN</div>
-            <h1>FranchiseOps AI</h1>
-        </div>
-        """, unsafe_allow_html=True)
-        st.markdown('<div class="brand-sub">Infosys Springboard</div>', unsafe_allow_html=True)
+        render_header()
 
         users = load_users()
         current_user = next((u for u in users if u["username"] == st.session_state["username"]), None)
+        dashboard_view = st.session_state["dashboard_view"]
 
-        if dashboard_view == "Home":
+        if dashboard_view == "Dashboard":
             st.markdown(
                 '<div class="milestone-banner">🎉 Welcome! Milestone 1 Complete — '
                 'Authentication System is Live</div>',
                 unsafe_allow_html=True
             )
-
             with st.container(border=True):
                 st.subheader(f"Welcome back, {st.session_state['username']} 👋")
                 st.write("You're securely logged in with an active JWT session.")
+                st.markdown('<div class="coming-soon">🚧 Franchise analytics and reporting features coming in the next milestone.</div>',
+                            unsafe_allow_html=True)
 
-                st.markdown('<div class="coming-soon">🚧 Franchise management features coming in the next milestone.</div>',
+        elif dashboard_view == "Analytics":
+            with st.container(border=True):
+                st.subheader("Analytics")
+                st.markdown('<div class="coming-soon">📊 Franchise analytics dashboard is being built in an upcoming milestone.</div>',
+                            unsafe_allow_html=True)
+
+        elif dashboard_view == "Reports":
+            with st.container(border=True):
+                st.subheader("Reports")
+                st.markdown('<div class="coming-soon">📄 Reporting tools are being built in an upcoming milestone.</div>',
                             unsafe_allow_html=True)
 
         elif dashboard_view == "My Profile":
             with st.container(border=True):
                 st.subheader("My Profile")
-
                 if current_user:
                     st.markdown(f"""
                         <div class="info-row"><span class="info-label">Username</span><span class="info-value">{current_user['username']}</span></div>
@@ -382,46 +481,37 @@ if "token" in st.session_state:
         del st.session_state["token"]
         del st.session_state["username"]
 
-st.markdown("""
-<div class="brand-badge">
-    <div class="logo-box">IN</div>
-    <h1>FranchiseOps AI</h1>
-</div>
-""", unsafe_allow_html=True)
-st.markdown('<div class="brand-sub">Infosys Springboard</div>', unsafe_allow_html=True)
+render_header()
 st.markdown('<div class="subtitle">User Authentication System</div>', unsafe_allow_html=True)
 
 # ---------------- SIDEBAR NAV (pre-login) ---------------- #
-st.sidebar.markdown("""
-<div style="padding: 0.3rem 0 1.4rem;">
-    <div style="display:flex;align-items:center;gap:8px;">
-        <div style="background:linear-gradient(135deg,#4f46e5,#6366f1);width:32px;height:32px;
-                    border-radius:9px;display:flex;align-items:center;justify-content:center;
-                    font-family:'Poppins',sans-serif;font-weight:800;font-size:0.85rem;color:white;">IN</div>
-        <div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:1rem;color:#f3f4f6;">FranchiseOps AI</div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+render_sidebar_brand()
 
 st.sidebar.markdown(
-    '<div style="color:#9ca3af;font-size:0.72rem;font-weight:700;letter-spacing:1px;'
-    'text-transform:uppercase;margin-bottom:0.4rem;">Account</div>',
+    '<div style="color:#9ca3af;font-size:0.7rem;font-weight:700;letter-spacing:1px;'
+    'text-transform:uppercase;margin-bottom:0.5rem;">Account</div>',
     unsafe_allow_html=True
 )
 
-pages = ["Login", "Signup", "Admin Login"]
-labels = {"Login": "🔑  Login", "Signup": "✍️  Signup", "Admin Login": "🛡️  Admin Login"}
+account_items = [("Login", "🔑"), ("Signup", "✍️")]
+for label, icon in account_items:
+    if nav_button(label, icon, f"nav_{label}", st.session_state["active_page"] == label):
+        st.session_state["active_page"] = label
+        st.session_state["auth_view"] = "login"
+        st.rerun()
 
-menu = st.sidebar.radio(
-    "Navigation",
-    pages,
-    index=pages.index(st.session_state["active_page"]) if st.session_state["active_page"] in pages else 0,
-    label_visibility="collapsed",
-    format_func=lambda p: labels[p]
+st.sidebar.markdown('<hr style="border-color:#3730a3;margin:1rem 0 0.8rem;">', unsafe_allow_html=True)
+st.sidebar.markdown(
+    '<div style="color:#9ca3af;font-size:0.7rem;font-weight:700;letter-spacing:1px;'
+    'text-transform:uppercase;margin-bottom:0.5rem;">Administration</div>',
+    unsafe_allow_html=True
 )
-st.session_state["active_page"] = menu
-if menu != "Login":
-    st.session_state["auth_view"] = "login"
+
+if nav_button("Admin Login", "🛡️", "nav_Admin", st.session_state["active_page"] == "Admin Login"):
+    st.session_state["active_page"] = "Admin Login"
+    st.rerun()
+
+menu = st.session_state["active_page"]
 
 st.sidebar.markdown(
     '<div class="sidebar-footer">🟢 System Online &nbsp;·&nbsp; v1.0</div>',
@@ -457,7 +547,7 @@ if menu == "Login":
                             token = jwt.encode(payload, JWT_SECRET, algorithm="HS256")
                             st.session_state["token"] = token
                             st.session_state["username"] = user["username"]
-                            st.session_state["dashboard_view"] = "Home"
+                            st.session_state["dashboard_view"] = "Dashboard"
                             st.success("Login Successful!")
                             st.rerun()
 
