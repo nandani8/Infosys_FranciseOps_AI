@@ -45,7 +45,7 @@ I started from the milestone brief (Login, Signup, Forgot Password, JWT sessions
 
 **7. UI pass.** The first UI used a CSS trick (`<div>` markdown wrappers) to try to build "cards" — which left broken empty boxes because Streamlit doesn't actually let widgets render inside markdown HTML. Switched to Streamlit's native `st.container(border=True)`, which fixed the layout properly. Iterated on button sizing (`use_container_width=True` + `type="primary"`/`"secondary"` for real button theming instead of fragile CSS selectors), added a branded header, a grouped sidebar nav with icons, and a "Not registered? Sign up" / "Already have an account?" cross-link between Login and Signup — small touches that make it feel like a finished product rather than a bare debug UI.
 
-**8. Post-login dashboard.** Added an actual sidebar menu inside the Dashboard (Home / My Profile / Logout) instead of a dead-end welcome message — Home shows a "Milestone 1 Complete" banner and a note about upcoming franchise-management features, My Profile shows the logged-in user's own account details pulled live from `users.json`.
+**8. Post-login dashboard.** Added an actual sidebar menu inside  (Dashboard / Reports/ Analytics/ My Profile / Logout) instead of a dead-end welcome message — Home shows a "Milestone 1 Complete" banner and a note about upcoming franchise-management features, My Profile shows the logged-in user's own account details pulled live from `users.json`.
 
 **9. Notebook cleanup.** The working notebook went through a lot of trial-and-error (`pkill`/`nohup`/repeated installs while debugging). Final version is a clean 6-cell sequence: install → write `app.py` → load secrets → launch Streamlit → check logs → start ngrok.
 
