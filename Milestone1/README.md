@@ -8,7 +8,7 @@
 
 | Page | Screenshot |
 |---|---|
-| Login Page — OTP via Email | ![User Login](SS/login.png) |
+| Login Page | ![User Login](SS/login.png) |
 | Forgot Password — OTP via Email | ![OTP Flow](SS/forgotpass.png) |
 | User Dashboard | ![Dashboard](SS/dashboard.png) |
 
