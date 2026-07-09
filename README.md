@@ -9,7 +9,8 @@
 | Page | Screenshot |
 |---|---|
 | Login Page | ![User Login](Milestone1/SS/login.png) |
-| Forgot Password — OTP via Email | ![OTP Flow](Milestone1/SS/forgotpass.png) |
+| Forgot Password| ![OTP Flow](Milestone1/SS/forgotpass.png) |
+| OTP via Email| ![Dashboard](Milestone1/SS/otp.png) |
 | User Dashboard | ![Dashboard](Milestone1/SS/dashboard.png) |
 
 ---
