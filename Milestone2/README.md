@@ -108,16 +108,16 @@ app.py                  # Main Streamlit app / page router
 > Screenshots are stored in the [`screenshots/`](./screenshots) folder.
 
 ### 1. Login Page
-![Login Page](./screenshots/login_page.png)
+![Login Page](./screenshots/login.png)
 
 ### 2. Admin Dashboard
-![Admin Dashboard](./screenshots/admin_dashboard.png)
+![Admin Dashboard](./screenshots/dashboard_admin.png)
 
 ### 3. AI Copilot
-![AI Copilot](./screenshots/ai_copilot.png)
+![AI Copilot](./screenshots/copilot.png)
 
 ### 4. Agent Tab (Workforce / Outlets / Inventory)
-![Agent Tab](./screenshots/agent_tab.png)
+![Agent Tab](./screenshots/agent.png)
 
 ## Roadmap / known limitations
 
