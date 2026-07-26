@@ -117,7 +117,7 @@ app.py                  # Main Streamlit app / page router
 ![AI Copilot](./screenshots/copilot.png)
 
 ### 4. Agent Tab (Workforce / Outlets / Inventory)
-![Agent Tab](./screenshots/agent.png)
+![Agent Tab](./screenshots/agents.png)
 
 ## Roadmap / known limitations
 
