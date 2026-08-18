@@ -65,7 +65,7 @@ Each query returns the top matching document chunk along with its source and doc
 
 > _[Screenshot placeholder — paste the query/answer display output here]_
 >
-> ![Query Answer Display](Screenshots/demo.png)
+> ![Query Answer Display](Screenshot/demo.png)
 
 ---
 
