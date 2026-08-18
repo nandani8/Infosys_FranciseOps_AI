@@ -65,7 +65,7 @@ Each query returns the top matching document chunk along with its source and doc
 
 > _[Screenshot placeholder — paste the query/answer display output here]_
 >
-> ![Query Answer Display](screenshots/query_answer_display.png)
+> ![Query Answer Display](Screenshots/demo.png)
 
 ---
 
@@ -97,17 +97,6 @@ Each query returns the top matching document chunk along with its source and doc
 2. Mount Google Drive when prompted
 3. Run all cells top to bottom — Phase 3 (PDF download/extraction) takes the longest given the volume of documents
 4. The final cell runs the 50-query validation and prints results
-
----
-
-## 👥 Team Contributions
-
-| Name | Contribution |
-|---|---|
-| _[Name]_ | _[e.g. Authentication module, security hardening]_ |
-| _[Name]_ | _[e.g. ML agents, LLM Copilot integration]_ |
-| _[Name]_ | _[e.g. RAG pipeline, document collection]_ |
-
 ---
 
 ## ✅ Milestone 3 Checklist
@@ -117,4 +106,3 @@ Each query returns the top matching document chunk along with its source and doc
 - [x] Knowledge base expanded to 511 unique PDFs (from ~90 originally)
 - [x] 50 test queries validated (exceeds 30+ requirement)
 - [ ] Screenshots captured and linked in README
-- [ ] Team contributions documented
