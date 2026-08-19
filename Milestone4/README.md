@@ -208,7 +208,7 @@ Accessible to users with the Admin role:
 
 ![Digital Twin](Screenshots/DigitalTwin.png)
 
-![Anomaly Scanner](Screenshots/AnomalyDetector.png)
+![Anomaly Scanner](Screenshots/AnomalyDetection.png)
 
 ![Agent 9 - PDF SOP RAG Studio](Screenshots/Agent9.png)
 
