@@ -198,19 +198,19 @@ Accessible to users with the Admin role:
 
 ## Screenshots
 
-![Login Portal](Screenshot/login.png)
+![Login Portal](Screenshot/Login.png)
 
-![Admin Dashboard](Screenshot/admin_dashboard.png)
+![Admin Dashboard](Screenshots/Admin.png)
 
-![AI Copilot](Screenshot/ai_copilot.png)
+![AI Copilot](Screenshots/copilot.png)
 
-![Agent 1 - Outlet Performance](Screenshot/agent1.png)
+![Agent 1 - Outlet Performance](Screenshots/Agent1.png)
 
-![Digital Twin](Screenshot/digital_twin.png)
+![Digital Twin](Screenshots/DigitalTwin.png)
 
-![Anomaly Scanner](Screenshot/anomaly_scanner.png)
+![Anomaly Scanner](Screenshots/AnomalyDetector.png)
 
-![Agent 9 - PDF SOP RAG Studio](Screenshot/agent9.png)
+![Agent 9 - PDF SOP RAG Studio](Screenshots/Agent9.png)
 
 ---
 
