@@ -198,7 +198,7 @@ Accessible to users with the Admin role:
 
 ## Screenshots
 
-![Login Portal](Screenshot/Login.png)
+![Login Portal](Screenshots/Login.png)
 
 ![Admin Dashboard](Screenshots/Admin.png)
 
