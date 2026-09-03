@@ -196,19 +196,19 @@ Accessible to users with the Admin role:
 ---
 
 ## Screenshots
-
+**Login Page**
 ![Login Portal](Screenshots/Login.png)
-
+**Admin Dashboard**
 ![Admin Dashboard](Screenshots/admin.jpg)
-
+**AI Copilot**
 ![AI Copilot](Screenshots/copilot.png)
-
+**Agent 1**
 ![Agent 1 - Outlet Performance](Screenshots/Agent1.png)
-
+**Digital Twin**
 ![Digital Twin](Screenshots/DigitalTwin.png)
-
+**Anomaly Scanner**
 ![Anomaly Scanner](Screenshots/AnomalyDetection.png)
-
+**Agent 9**
 ![Agent 9 - PDF SOP RAG Studio](Screenshots/Agent9.png)
 
 ---
