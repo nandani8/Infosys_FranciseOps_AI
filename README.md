@@ -199,7 +199,7 @@ Accessible to users with the Admin role:
 
 ![Login Portal](Screenshots/Login.png)
 
-![Admin Dashboard](Screenshots/Admin.png)
+![Admin Dashboard](Screenshots/admin.jpg)
 
 ![AI Copilot](Screenshots/copilot.png)
 
