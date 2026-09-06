@@ -4,12 +4,6 @@
 
 FranchiseOps AI is an enterprise multi-agent platform that helps franchise networks monitor outlet performance, inventory, staff productivity, marketing ROI, customer sentiment, and regulatory compliance — all through a single Streamlit application backed by a grounded, multilingual AI Copilot.
 
-This milestone integrates three previously separate components into one working execution pipeline:
-
-```
-RAG Engine  →  Kaggle DataPipeline / ML Trainer  →  Overall FranchiseOps AI Application
-```
-
 ---
 
 ## 📌 Table of Contents
