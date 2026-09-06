@@ -1,6 +1,6 @@
 # FranchiseOps AI — Agentic AI for Franchise Management System with Performance Monitoring Assistance
 
-[![▶ Watch Demo](.Screenshots/e66a291b-a9fb-437b-a71b-ed547247e030.png)](https://drive.google.com/file/d/1F_VQhhmOMvzfSMQZED-ulhA232PwR7H0/view?usp=sharing)
+[![▶ Watch Demo](Screenshots/e66a291b-a9fb-437b-a71b-ed547247e030.png)](https://drive.google.com/file/d/1F_VQhhmOMvzfSMQZED-ulhA232PwR7H0/view?usp=sharing)
 
 FranchiseOps AI is an enterprise multi-agent platform that helps franchise networks monitor outlet performance, inventory, staff productivity, marketing ROI, customer sentiment, and regulatory compliance — all through a single Streamlit application backed by a grounded, multilingual AI Copilot.
 
